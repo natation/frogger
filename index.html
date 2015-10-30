@@ -6,19 +6,49 @@
 <body>
   <canvas></canvas>
 
-  <script type="application/javascript" src="lib/moving_object.js"></script>
-  <script type="application/javascript" src="lib/game.js"></script>
-  <script type="application/javascript" src="lib/game_view.js"></script>
+  <script src="lib/util.js"></script>
+  <script src="lib/game_view.js"></script>
+  <script src="lib/game.js"></script>
+  <script src="lib/moving_object.js"></script>
+  <script src="lib/frog.js"></script>
+
+  </script>
 
   <script type="application/javascript">
     (function () {
+      var images = {},
+          loadedImages = 0,
+          numImages = 0,
+          sources = {
+            bg: "assets/frogger_bg.png",
+            frog: "assets/frog.png",
+            frogDead: "assets/frog_dead.png"
+          };
       var canvasEl = document.getElementsByTagName("canvas")[0];
       canvasEl.width = Frogger.Game.DIM_X;
       canvasEl.height = Frogger.Game.DIM_Y;
-
       var ctx = canvasEl.getContext("2d");
-      var game = new Frogger.Game();
-      new Frogger.GameView(game, ctx).start();
+
+      loadImages(sources, function (images) {
+        Frogger.Game.BG = [images.bg, 0, 0];
+        var game = new Frogger.Game(images);
+        new Frogger.GameView(game, ctx).start();
+      });
+
+      function loadImages (sources, callback) {
+        for (var src in sources) {
+          numImages++;
+        }
+        for (var src in sources) {
+          images[src] = new Image();
+          images[src].onload = function () {
+            if (++loadedImages === numImages) {
+              callback(images);
+            }
+          };
+          images[src].src = sources[src];
+        }
+      }
     })();
   </script>
 </body>
