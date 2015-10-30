@@ -30,7 +30,6 @@
       var ctx = canvasEl.getContext("2d");
 
       loadImages(sources, function (images) {
-        Frogger.Game.BG = [images.bg, 0, 0];
         var game = new Frogger.Game(images);
         new Frogger.GameView(game, ctx).start();
       });
