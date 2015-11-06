@@ -18,6 +18,7 @@ the turtles too long (they submerge).
 as the frog jumping and the turtles submerging.
 * All objects inherit from MovingObject to share common functionality
 * Frog will move with logs and un-submerged turtles without having to press any arrow keys
+* Matching sound and images for getting to the lilypad, jumping, and dying
 * Frogger gameplay
 
   ![gameplay](assets/frogger.png)
